@@ -8,6 +8,7 @@ setup_logging()
 logger = logging.getLogger(__name__)
 
 app = FastAPI()
+app.include_router(airports.router)
 
 
 @app.get("/")
