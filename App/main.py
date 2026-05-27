@@ -1,4 +1,11 @@
 from fastapi import FastAPI
+import logging
+
+from .logging_config import  setup_logging
+from .routes import airports
+
+setup_logging()
+logger = logging.getLogger(__name__)
 
 app = FastAPI()
 
