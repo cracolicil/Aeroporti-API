@@ -22,7 +22,12 @@ def get_airport(airport_id: int):
     return airport
 
 @router.post("", response_model=Aeroporto, status_code=201)
-def create_airport(airport: AeroportoBase):
+def create_airport(airport: AeroportoBase, key: str = Depends(header_scheme)):
+    if key != API_KEY:
+        raise HTTPException(
+            status_code=401,
+            detail="Missing or invalid API key"
+        )
     return crud.create_aeroporto(airport.model_dump())
 
 @router.delete("/{airport_id}", status_code=204)
