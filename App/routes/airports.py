@@ -18,3 +18,8 @@ def get_airport(airport_id: int):
 @router.post("", response_model=Aeroporto, status_code=201)
 def create_airport(airport: AeroportoBase):
     return crud.create_aeroporto(airport.model_dump())
+
+@router.delete("/{airport_id}", status_code=204)
+def delete_airport(airport_id: int):
+    airport = get_airport(airport_id)
+    crud.delete_aeroporto(airport_id)
