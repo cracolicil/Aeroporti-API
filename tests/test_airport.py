@@ -58,3 +58,7 @@ def test_delete_airport_success():
 def test_delete_airport_fail():
     response = client.delete("/aeroporti/999", headers={"api-key":"1"})
     assert response.status_code == 404
+
+def test_delete_airport_unauthorized():
+    response = client.delete("/aeroporti/999")
+    assert response.status_code == 401
