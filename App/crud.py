@@ -17,3 +17,10 @@ def get_aeroporto(id: int):
 
     logger.warning(f"Airport with id:{id} Not Found")
     return None
+
+def create_aeroporto(airport_data: dict):
+    new_id = len(aeroporti_db) + 1
+    new_airport = {"id": new_id, **airport_data}
+    aeroporti_db.append(new_airport)
+    logger.info(f"Airport created with id:{new_id}")
+    return new_airport
