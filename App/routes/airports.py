@@ -14,3 +14,7 @@ def get_airport(airport_id: int):
     if not airport:
         raise HTTPException(status_code=404, detail="Airport not found")
     return airport
+
+@router.post("", response_model=Aeroporto, status_code=201)
+def create_airport(airport: AeroportoBase):
+    return crud.create_aeroporto(airport.model_dump())
