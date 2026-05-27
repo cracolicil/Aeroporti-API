@@ -1,9 +1,12 @@
+import os
+
 from fastapi import APIRouter, HTTPException, Depends
-from fastapi.security import APIKeyHeader
+from fastapi.security import APIKeyHeader, api_key
 from typing import List
 from .. import crud
 from ..models import Aeroporto, AeroportoBase
 
+API_KEY = os.getenv("api_key")
 router = APIRouter(prefix="/aeroporti", tags=["Aeroporti"])
 header_scheme = APIKeyHeader(name="api-key")
 
@@ -24,5 +27,11 @@ def create_airport(airport: AeroportoBase):
 
 @router.delete("/{airport_id}", status_code=204)
 def delete_airport(airport_id: int, key: str = Depends(header_scheme)):
-    airport = get_airport(airport_id)
-    crud.delete_aeroporto(airport_id)
+    if key == API_KEY:
+        airport = get_airport(airport_id)
+        crud.delete_aeroporto(airport_id)
+    else:
+        raise HTTPException(
+            status_code=401,
+            detail="Missing or invalid API key"
+        )
