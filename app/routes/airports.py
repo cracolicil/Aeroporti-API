@@ -4,8 +4,8 @@ from .. import crud
 from ..models import Aeroporto, AeroportoBase
 
 router = APIRouter(prefix="/aeroporti", tags=["Aeroporti"])
-@router.get("", response_model=List[Aeroporto])
-def list_airports(page: int = 1, size = 10):
+@router.get("", response_model=dict)
+def list_airports(page: int = 1, size: int = 10):
     return crud.get_aeroporti(page, size)
 
 @router.get("/{airport_id}", response_model=Aeroporto)

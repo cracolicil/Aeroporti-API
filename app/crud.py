@@ -7,7 +7,10 @@ def get_aeroporti(page: int, size: int):
     logger.info(f"Fetching airports page={page} size={size}")
     start = (page - 1) * size
     end = start + size
-    total = len(aeroporti_db) / (end-start)
+    if size > len(aeroporti_db):
+        total = 1
+    else:
+        total = len(aeroporti_db) / size
     return {
         "page": page,
         "size": size,
