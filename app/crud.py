@@ -26,10 +26,8 @@ def create_aeroporto(airport_data: dict):
     return new_airport
 
 def delete_aeroporto(id: int):
-    for airport in aeroporti_db:
-        if airport["id"] == id:
-            aeroporti_db.remove(airport)
-            logger.info(f"Airport with id:{id} successfully removed")
-            return 0
-    logger.warning(f"Airport with id:{id} Not Found")
+    airport = get_aeroporto(id)
+    if not airport:
+        return None
+    logger.info(f"Airport with id:{id} successfully removed")
     return 0
