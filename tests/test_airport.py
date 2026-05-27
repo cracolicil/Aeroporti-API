@@ -31,3 +31,14 @@ def test_get_airport_success():
 
     data = response.json()
     assert data["id"] == 1
+
+def test_create_airport():
+    body = {
+        "codice": "SLT",
+        "citta": "Salsomaggiore Terme"
+    }
+    response = client.post("/aeroporti", json=body)
+    assert response.status_code == 201
+    data = response.json()
+    assert data["codice"] == body["codice"]
+    assert "id" in data
