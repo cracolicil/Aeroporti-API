@@ -7,7 +7,7 @@ from .routes import airports
 setup_logging()
 logger = logging.getLogger(__name__)
 
-app = FastAPI()
+app = FastAPI(title="Airports API")
 app.include_router(airports.router)
 
 
