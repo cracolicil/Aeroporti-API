@@ -1,9 +1,12 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from fastapi.security import APIKeyHeader
 from typing import List
 from .. import crud
 from ..models import Aeroporto, AeroportoBase
 
 router = APIRouter(prefix="/aeroporti", tags=["Aeroporti"])
+header_scheme = APIKeyHeader(name="api-key")
+
 @router.get("", response_model=dict)
 def list_airports(page: int = 1, size: int = 10):
     return crud.get_aeroporti(page, size)
@@ -20,6 +23,6 @@ def create_airport(airport: AeroportoBase):
     return crud.create_aeroporto(airport.model_dump())
 
 @router.delete("/{airport_id}", status_code=204)
-def delete_airport(airport_id: int):
+def delete_airport(airport_id: int, key: str = Depends(header_scheme)):
     airport = get_airport(airport_id)
     crud.delete_aeroporto(airport_id)

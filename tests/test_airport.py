@@ -52,9 +52,9 @@ def test_create_airport_fail():
     assert response.status_code == 422
 
 def test_delete_airport_success():
-    response = client.delete("/aeroporti/1")
+    response = client.delete("/aeroporti/1", headers={"api-key":"1"})
     assert response.status_code == 204
 
 def test_delete_airport_fail():
-    response = client.delete("/aeroporti/999")
+    response = client.delete("/aeroporti/999", headers={"api-key":"1"})
     assert response.status_code == 404
