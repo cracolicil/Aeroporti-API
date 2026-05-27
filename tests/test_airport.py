@@ -40,7 +40,7 @@ def test_create_airport():
         "codice": "SLT",
         "citta": "Salsomaggiore Terme"
     }
-    response = client.post("/aeroporti", json=body)
+    response = client.post("/aeroporti", json=body, headers={"api-key":API_KEY})
     assert response.status_code == 201
     data = response.json()
     assert data["codice"] == body["codice"]
@@ -51,8 +51,24 @@ def test_create_airport_fail():
         "codice": "FD",
         "citta": "Fidenza"
     }
-    response = client.post("/aeroporti", json=body)
+    response = client.post("/aeroporti", json=body, headers={"api-key":API_KEY})
     assert response.status_code == 422
+
+def test_create_airport_api_key_missing():
+    body = {
+        "codice": "SLT",
+        "citta": "Salsomaggiore Terme"
+    }
+    response = client.post("/aeroporti", json=body)
+    assert response.status_code == 401
+
+def test_create_airport_api_key_wrong():
+    body = {
+        "codice": "SLT",
+        "citta": "Salsomaggiore Terme"
+    }
+    response = client.post("/aeroporti", json=body, headers={"api-key":"chiave_errata"})
+    assert response.status_code == 401
 
 def test_delete_airport_success():
     response = client.delete("/aeroporti/1", headers={"api-key":API_KEY})
