@@ -50,3 +50,7 @@ def test_create_airport_fail():
     }
     response = client.post("/aeroporti", json=body)
     assert response.status_code == 422
+
+def test_delete_airport_success():
+    response = client.delete("/aeroporti/1")
+    assert response.status_code == 204
