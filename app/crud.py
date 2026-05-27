@@ -30,4 +30,6 @@ def delete_aeroporto(id: int):
         if airport["id"] == id:
             aeroporti_db.remove(airport)
             logger.info(f"Airport with id:{id} successfully removed")
+            return 0
     logger.warning(f"Airport with id:{id} Not Found")
+    return 0
