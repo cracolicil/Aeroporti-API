@@ -42,3 +42,11 @@ def test_create_airport():
     data = response.json()
     assert data["codice"] == body["codice"]
     assert "id" in data
+
+def test_create_airport_fail():
+    body = {
+        "codice": "FD",
+        "citta": "Fidenza"
+    }
+    response = client.post("/aeroporti", json=body)
+    assert response.status_code == 422
