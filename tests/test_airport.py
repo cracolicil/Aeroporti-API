@@ -10,5 +10,6 @@ def test_get_airports_default_pagination():
     assert response.status_code == 200
 
     data = response.json()
-    assert isinstance(data, list)
-    assert len(data) >= 1
+    assert isinstance(data, dict)
+    assert isinstance(data["data"], list)
+    assert len(data["data"]) >= 1
