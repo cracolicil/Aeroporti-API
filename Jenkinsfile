@@ -78,6 +78,14 @@ pipeline{
             }
         }
         */
+        stage('Build Docker Image'){
+            agent{
+                label 'agent-docker'
+            }
+            steps{
+                sh './dockerbuild.sh'
+            }
+        }
         stage('Deploy'){
             steps{
                 echo 'Deploying...'
