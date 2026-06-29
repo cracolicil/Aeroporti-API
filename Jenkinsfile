@@ -80,7 +80,7 @@ pipeline{
         */
         stage('Build Docker Image'){
             agent{
-                label 'agent-docker'
+                label 'DOCKER'
             }
             steps{
                 sh './dockerbuild.sh'
