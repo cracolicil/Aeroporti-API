@@ -42,11 +42,11 @@ pipeline{
                     python -m pytest tests/test_airport.py --junitxml=${WORKSPACE}/test_report.xml
                 '''
             }
+            post{
+                always{
+                    archiveArtifacts artifacts: 'test_report.xml', allowEmptyArchive: true
+                }
         }
-        post{
-            always{
-                archiveArtifacts artifacts: 'test_report.xml', allowEmptyArchive: true
-            }
         }
         stage('Deploy'){
             steps{
