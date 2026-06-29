@@ -43,6 +43,11 @@ pipeline{
                 '''
             }
         }
+        post{
+            always{
+                archiveArtifacts artifacts: 'test_report.xml', allowEmptyArchive: true
+            }
+        }
         stage('Deploy'){
             steps{
                 echo 'Deploying...'
