@@ -83,6 +83,7 @@ pipeline{
                 label 'DOCKER'
             }
             steps{
+                sh 'chmod +x ./dockerbuild.sh'
                 sh './dockerbuild.sh'
             }
         }
