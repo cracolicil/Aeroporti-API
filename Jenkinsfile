@@ -65,6 +65,7 @@ pipeline{
             }
         }
         */
+        /*
         stage('Build Docker Image'){
             steps{
                 script{
@@ -76,6 +77,7 @@ pipeline{
                 }
             }
         }
+        */
         stage('Deploy'){
             steps{
                 echo 'Deploying...'
