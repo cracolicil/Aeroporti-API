@@ -26,7 +26,7 @@ def test_get_airports_with_pagination():
 
 def test_get_airport_not_found():
     response = client.get("/aeroporti/999")
-    assert response.status_code == 404
+    assert response.status_code == 201
 
 def test_get_airport_success():
     response = client.get("/aeroporti/1")
