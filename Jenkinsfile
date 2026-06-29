@@ -48,6 +48,7 @@ pipeline{
                 }
             }
         }
+        /*
         stage('Build Package'){
             steps{
                 sh '''
@@ -63,6 +64,7 @@ pipeline{
                 }
             }
         }
+        */
         stage('Build Docker Image'){
             steps{
                 echo 'Building image...'
