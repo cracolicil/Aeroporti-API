@@ -46,7 +46,27 @@ pipeline{
                 always{
                     archiveArtifacts artifacts: 'test_report.xml', allowEmptyArchive: true
                 }
+            }
         }
+        stage('Build Package'){
+            steps{
+                sh '''
+                    . ${VIRTUAL_ENV}/bin/activate
+                    python setup.py sdist bdist_wheel
+
+                    twine check dist/*
+                '''
+            }
+            post{
+                success{
+                    archiveArtifacts artifacts: 'dist/*', fingerprint: true
+                }
+            }
+        }
+        stage('Build Docker Image'){
+            steps{
+                echo 'Building image...'
+            }
         }
         stage('Deploy'){
             steps{
