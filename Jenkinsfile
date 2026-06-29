@@ -67,7 +67,13 @@ pipeline{
         */
         stage('Build Docker Image'){
             steps{
-                echo 'Building image...'
+                script{
+                    def image = docker.build("myapp:${env.BUILD_NUMBER}")
+
+                    docker.withRegistry('https://hub.docker.com/repositories/leocraco'){
+                        image.push("${env.BUILD_NUMBER}")
+                    }
+                }
             }
         }
         stage('Deploy'){
