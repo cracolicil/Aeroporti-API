@@ -8,4 +8,8 @@ CONTAINER_ID=$(docker run -d leocraco/aeroporti:v1)
 
 # Possibili test API
 
+# Pulizia del container dopo averlo testato
 docker rm -f ${CONTAINER_ID} || true
+
+# Push dell'immagine su Registry
+docker push leocraco/aeroporti:v1
