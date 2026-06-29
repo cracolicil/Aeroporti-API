@@ -39,7 +39,7 @@ pipeline{
                 sh '''
                     . ${VIRTUAL_ENV}/bin/activate
                     export api_key=${API_KEY}
-                    python -m pytest tests/test_airport.py --junit-xml=$PWD/test_report.xml
+                    python -m pytest tests/test_airport.py --junitxml=${WORKSPACE}/test_report.xml
                 '''
             }
         }
